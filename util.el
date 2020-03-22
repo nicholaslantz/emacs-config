@@ -114,3 +114,7 @@ returns t."
 (defmacro pos (&rest forms)
   "Product of sums for forms."
   `(* ,@(mapcar (lambda (form) (cons '+ form)) forms)))
+
+(defun mkcd (dirname)
+  (make-directory dirname)
+  (cd dirname))
