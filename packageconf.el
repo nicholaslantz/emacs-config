@@ -3,6 +3,17 @@
 (use-package doom-themes
   :config (load-theme 'doom-sourcerer))
 
+(use-package evil
+  :config (evil-mode 1))
+
+(evil-define-key 'normal slime-mode-map ",cc" 'slime-compile-defun)
+
+(use-package evil-cleverparens
+  :hook ((lisp-mode . evil-cleverparens-mode)
+	 (emacs-lisp-mode . evil-cleverparens-mode)))
+
+(evil-define-key 'visual 'prog-mode-map ";" 'comment-or-uncomment-region)
+
 (use-package ledger-mode
   :custom (ledger-post-auto-adjust-amount t))
 
@@ -12,6 +23,12 @@
 (use-package slime-autoloads
   :after slime
   :custom (slime-contribs (append '(slime-fancy) slime-contribs)))
+
+(use-package god-mode)
+
+(use-package evil-god-state
+  :config
+  (evil-define-key 'normal global-map "," 'evil-execute-in-god-state))
 
 (use-package org
   :bind (("C-c c" . org-capture)
@@ -42,8 +59,8 @@
 (use-package eshell
   :bind ("C-c e" . eshell))
 
-(use-package paredit
-  :hook ((lisp-mode emacs-lisp-mode geiser-mode) . paredit-mode))
+;; (use-package paredit
+;;   :hook ((lisp-mode emacs-lisp-mode geiser-mode) . paredit-mode))
 
 (use-package clojure-mode)
 (use-package cider)
